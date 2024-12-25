@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LittleScript - A Note Diary</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="shortcut icon" href="logo_transparent.png" >
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
+        <a class="navbar-brand" href="#">LittleScript</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.html">About <span class="sr-only">(current)</span></a>
+              </li>
+            </ul>
+          <!-- <form class="form-inline my-2 my-lg-0">
+                <input id="searchTxt" class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search notes here..."
+                    aria-label="Search">
+            </form> -->
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <!-- <button id="signInButton" onclick="logIn()" class="btn btn-primary d-none">Sign In</button>
+                    <button id="signOutButton" onclick="logOut()" class="btn btn-primary">Sign Out</button> -->
+                    <a id="signInButton" class="nav-link d-none" href="index.html" onclick="logOut()">Login Here!!<span class="sr-only">(current)</span></a>
+                    <a id="signOutButton" class="nav-link" href="#" onclick="logOut()">Logout<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+    </div>
+    </nav>
+    <div class="container my-3">
+       <h2>Welcome to LittleScript</h2>
+        <h3 id='email-display'></h3>
+        <hr>
+        <h2 class="text-center">Notes List</h2>
+        <hr>
+        <button id="addNoteButton" class="btn btn-primary rounded-0" data-toggle="modal" data-target="#newNoteModal">Add Note</button>
+        <!-- <button class="btn btn-primary rounded-0" onclick="fillNote('Hello');">Add Note</button> -->
+        <div id="notesDisplay" class="row container-fluid m-2">
+        </div>
+    </div>
+
+    <!-- Description Modal -->
+    <div class="modal fade bd-example-modal-lg" id="descriptionModal" tabindex="-1" aria-hidden="true" ng-controller="noteDescriptionController">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <!-- <h4><img src="img/to-do-list.png" title="note" id="note-img"/> {{descriptionNote.title}}</h4> -->
+              <img src="img/to-do-list.png" title="note" id="note-img"/><h4 id="noteTitle"> </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+            </div>
+          <!-- Modal Body -->
+            <div class="modal-body">
+              <b>Created Date:</b> <p id="noteDateCreated"></p>
+              <br>
+              <b>Description:</b> <br> <p id="noteDescription"></p>
+              <br>
+              <div class="col-sm-auto d-none" id="editNoteForm">
+                <div class="input-group input-group upload-form">
+                  <textarea class="form-control" id="noteTextarea"></textarea>
+                </div>
+              </div> 
+              <button id="showEditNote" align="center" type="button" onclick="showEditNote();" class="btn btn-secondary btn-sm">Edit Description</button>
+                <div class="row">
+                <div class="col-md-12">
+                    <img src="img/paperclip.png" title="attachments" id="attachments-img"/>
+                    <p id="descriptionAttachements"><b>Attached Files</b></p>
+                </div>
+                <br>
+                <div class="container">
+                  <div id="noteFilesGrid" class="row" ng-controller="noteFilesListController">
+                    <!-- <div class="col-auto" id={{file.fileID}} ng-repeat="file in files">
+                          <p align="center">
+                            <a href={{file.filePath}}>{{file.fileName}}</a>
+                            <button id="deleteFileButton" align="center" type="button" ng-click="deleteFileClicked(file.noteID, file.fileID, file.filePath)" class="btn btn-outline-info btn-sm"><img src="img/cross.png" title="deleteFile" id="deleteFile-img"/></button>
+                          </p>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <p></p>
+              <div class="col-sm-auto d-none" id="addFilesForm">
+                <div class="input-group input-group upload-form">
+                    <div class="input-group-prepend">
+                        <span type="button" class="btn btn-success" id="uploadButton" ng-click="uploadFileClicked(descriptionNote.noteID)">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="form-control-file input-group" id="fileInput" aria-describedby="fileinput" onChange="viewNoteChangeFileName();">
+                        <label class="custom-file-label" for="fileInput" id="fileName1">Choose File</label>
+                    </div>
+                </div>
+              </div> 
+          <br>
+            <button id="showAddFilesButton" align="center" type="button" onclick="showAddFilesForm();" class="btn btn-secondary btn-sm">Add Files <img src="img/file.png" title="attachments" id="attachments-img"/></button>
+        </div>
+            <div class="modal-footer">
+              <!-- <div align="center">
+                <button id="completedButton" align="center" type="button" ng-click="completedClicked(descriptionNote.noteID)" class="btn btn-outline-success btn-sm">Mark Completed!</button>
+                <button id="alreadyCompletedButton" align="center" type="button" class="btn btn-success btn-sm d-none" disabled>Completed!</button>
+              </div> -->
+              <button id="deleteNoteButton" type="button" class="btn btn-danger btn-sm">Delete Note</button>
+              <button id="saveNoteButton" type="button" onclick="" class="btn btn-dark btn-sm">Update Note</button>
+           </div>
+          </div>
+        </div>
+    </div>
+    <!-- End Description Modal -->
+  
+
+
+    <!-- New Note Modal -->
+    <div class="modal fade" id="newNoteModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4><img src="img/new.png" title="note" id="note-img"/> Add Note</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <form id="newNoteForm" onsubmit="addNote(event)">
+              <label for="newNoteModalTitle">Title: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="text" id ="newNoteModalTitle" name="newNoteModalTitle" placeholder="" required />
+              <br>
+              <label for="newNoteModalDescription">Description:</label>
+              <textarea class="form-control" id="newNoteModalDescription" ></textarea>
+              <br>
+              <div class="col-sm-auto d-none" id="FilesForm">
+                <div class="input-group input-group upload-form">
+                    <div class="input-group-prepend">
+                        <span type="button" class="btn btn-success" id="uploadButton">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="form-control-file input-group" id="addNoteFileInput" aria-describedby="fileinput" onChange="addNoteChangeFileName();">
+                        <label class="custom-file-label" for="addNoteFileInput" id="fileName">Choose File</label>
+                    </div>
+                </div>
+              </div>
+              <!-- <button class="btn btn-dark" onclick="displayFilesForm();">Add Files</button> -->
+              <input type="submit" id="newNote-modal-button" name="newNoteButton" class="btn btn-outline-success" value="Add Note" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- End New Note Modal --> 
+
+
+
+
+
+
+
+    <!----------JAVASCRIPT--------->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1691.0.min.js"></script>
+    <!-- <script src="https://sdk.amazonaws.com/js/aws-sdk-2.135.0.min.js"></script> -->
+    <script src="js/aws-cognito-sdk.min.js"></script>
+    <script src="js/amazon-cognito-identity.min.js"></script>
+    <script src="js/script.js"></script>
+
+
+<script>
+      initializeStorage();
+      showNotes();
+      var x = localStorage.getItem("username");
+      document.getElementById('email-display').innerHTML = "Email: " + x;
+    </script>
+</body>
+
+</html>

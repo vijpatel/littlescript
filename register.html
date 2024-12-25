@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LittleScript - A Note Diary</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="shortcut icon" href="logo_transparent.png" >
+    <script src="js/amazon-cognito-identity.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
+        <a class="navbar-brand" href="#">LittleScript</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" href="about.html">About <span class="sr-only">(current)</span></a>
+                </li>
+              </ul>
+            <!-- <form class="form-inline my-2 my-lg-0">
+                <input id="searchTxt" class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search notes here..."
+                    aria-label="Search">
+            </form> -->
+           <!--  <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+    </div> -->
+    </nav>
+    <div class="container my-3" >
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <form id="userDetails" >
+                    <hr>
+                <h3 class="text-center">Register</h3>
+                <hr>    
+                    <div class="form-group input-field">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control rounded-0" name="email" id="email"aria-describedby="emailHelp" placeholder="Your email">
+                    </div>
+                    <div class="form-group input-field">
+                      <label for="pwd">Password</label>
+                      <input type="password" class="form-control rounded-0" name="pwd" id="pwd" placeholder="Your password">
+                    </div>
+                    <div class="form-group input-field">
+                      <label for="confirmPwd">Confirm Password</label>
+                      <input type="password" class="form-control rounded-0" name="confirmPwd" id="confirmPwd" placeholder="Confirm password">
+                  </div>
+                  <button class="btn btn-custom signin" onclick="register();">Register</button>
+                </form> 
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <!----------JAVASCRIPT--------->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/amazon-cognito-identity.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1691.0.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
